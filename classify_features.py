@@ -4,6 +4,9 @@ from generate_data import generate_data, load_partial
 # import tensorboard
 
 
+hidden_node = 32
+
+
 def train():
     graph = tf.Graph()
 
@@ -11,13 +14,13 @@ def train():
         x = tf.placeholder(dtype=tf.float32, shape=(None, 2), name='samples')
         y = tf.placeholder(dtype=tf.float32, shape=(None, 2), name='labels')
 
-        W1 = tf.Variable(tf.random_normal(shape=(2, 32)), name='weight1')
-        b1 = tf.Variable(tf.zeros(shape=(32)), name='bias1')
-        W2 = tf.Variable(tf.random_normal(shape=(32, 32)), name='weight2')
-        b2 = tf.Variable(tf.zeros(shape=(32)), name='bias2')
-        W3 = tf.Variable(tf.random_normal(shape=(32, 32)), name='weight3')
-        b3 = tf.Variable(tf.zeros(shape=(32)), name='bias3')
-        W4 = tf.Variable(tf.random_normal(shape=(32, 2)), name='weight4')
+        W1 = tf.Variable(tf.random_normal(shape=(2, hidden_node)), name='weight1')
+        b1 = tf.Variable(tf.zeros(shape=(hidden_node)), name='bias1')
+        W2 = tf.Variable(tf.random_normal(shape=(hidden_node, hidden_node)), name='weight2')
+        b2 = tf.Variable(tf.zeros(shape=(hidden_node)), name='bias2')
+        W3 = tf.Variable(tf.random_normal(shape=(hidden_node, hidden_node)), name='weight3')
+        b3 = tf.Variable(tf.zeros(shape=(hidden_node)), name='bias3')
+        W4 = tf.Variable(tf.random_normal(shape=(hidden_node, 2)), name='weight4')
         b4 = tf.Variable(tf.zeros(shape=(2)), name='bias4')
 
         z1 = tf.matmul(x, W1) + b1
